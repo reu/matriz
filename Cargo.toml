@@ -1,0 +1,10 @@
+[package]
+name = "matriz"
+version = "0.0.1"
+edition = "2021"
+authors = ["Rodrigo Navarro <rnavarro@rnavarro.com.br>"]
+license = "MIT"
+description = "Zero allocation Rust linear algebra library"
+repository = "https://github.com/reu/matriz"
+categories = ["mathematics", "no-std"]
+keywords = ["math", "linear", "algebra", "matrix", "vector"]
