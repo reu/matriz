@@ -8,3 +8,11 @@ description = "Zero allocation Rust linear algebra library"
 repository = "https://github.com/reu/matriz"
 categories = ["mathematics", "no-std"]
 keywords = ["math", "linear", "algebra", "matrix", "vector"]
+
+[package.metadata.docs.rs]
+all-features = true
+
+[features]
+default = ["std"]
+std = []
+full = ["std"]

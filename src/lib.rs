@@ -1,3 +1,5 @@
+#![no_std]
+
 mod array;
 mod matrix;
 mod scalar;

@@ -16,6 +16,10 @@ impl<T: Scalar, const D: usize> Vector<T, D> {
     }
 }
 
+#[cfg(feature = "std")]
+extern crate std;
+
+#[cfg(feature = "std")]
 impl<const D: usize> Vector<f32, D> {
     pub fn len(&self) -> f32 {
         self.len_squared().sqrt()
@@ -31,6 +35,7 @@ impl<const D: usize> Vector<f32, D> {
     }
 }
 
+#[cfg(feature = "std")]
 impl<const D: usize> Vector<f64, D> {
     pub fn len(&self) -> f64 {
         self.len_squared().sqrt()
@@ -50,25 +55,26 @@ impl<const D: usize> Vector<f64, D> {
 mod test {
     use super::*;
 
-    macro_rules! assert_approx_eq {
-        ($a:expr, $b:expr) => {{
-            let epsilon = f32::EPSILON.into();
-            let (a, b) = (&$a, &$b);
-            assert!(
-                (*a - *b).abs() < epsilon,
-                "assertion failed: `(left !== right)` (left: `{a:?}`, right: `{b:?}`)",
-            );
-        }}
-    }
-
     #[test]
     fn test_vector_len_squared() {
         assert_eq!(Vector::from([2, 3]).len_squared(), 2 * 2 + 3 * 3);
         assert_eq!(Vector::from([4, 5, 6]).len_squared(), 4 * 4 + 5 * 5 + 6 * 6);
     }
 
+    #[cfg(feature = "std")]
     #[test]
     fn test_normalize_vector() {
+        macro_rules! assert_approx_eq {
+            ($a:expr, $b:expr) => {{
+                let epsilon = f32::EPSILON.into();
+                let (a, b) = (&$a, &$b);
+                assert!(
+                    (*a - *b).abs() < epsilon,
+                    "assertion failed: `(left !== right)` (left: `{a:?}`, right: `{b:?}`)",
+                );
+            }};
+        }
+
         assert_approx_eq!(Vector::from([10.0f32, 6.0]).normalized().len(), 1.0);
         assert_eq!(
             Vector::from([0.0f32, 0.0]).normalized(),
