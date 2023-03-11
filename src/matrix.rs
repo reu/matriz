@@ -5,6 +5,12 @@ use crate::{array::ArrayBuilder, Scalar};
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Matrix<T, const ROWS: usize, const COLS: usize>([[T; COLS]; ROWS]);
 
+impl<T: Default, const R: usize, const C: usize> Default for Matrix<T, R, C> {
+    fn default() -> Self {
+        Self::try_from_iter((0..(R * C)).map(|_| T::default())).unwrap()
+    }
+}
+
 impl<T, const R: usize, const C: usize> From<[[T; C]; R]> for Matrix<T, R, C> {
     fn from(rows: [[T; C]; R]) -> Self {
         Self(rows)
@@ -169,6 +175,17 @@ impl<T: Clone, const R: usize, const C: usize> Matrix<T, R, C> {
 #[cfg(test)]
 mod test {
     use super::*;
+
+    #[test]
+    fn test_matrix_default() {
+        #[rustfmt::skip]
+        let expected = Matrix::from_rows([
+            [0, 0, 0],
+            [0, 0, 0],
+        ]);
+
+        assert_eq!(Matrix::default(), expected);
+    }
 
     #[test]
     fn test_matrix_from_cols() {
