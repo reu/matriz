@@ -131,8 +131,8 @@ impl<T, const R: usize, const C: usize> Matrix<T, R, C> {
             .map_err(|_| TryFromIterError::Underflowed)
     }
 
-    pub fn map<F: FnMut(T) -> U + Copy, U>(self, f: F) -> Matrix<U, R, C> {
-        Matrix::from_rows(self.0.map(|row| row.map(f)))
+    pub fn map<F: FnMut(T) -> U, U>(self, mut f: F) -> Matrix<U, R, C> {
+        Matrix::from_rows(self.0.map(move |row| row.map(&mut f)))
     }
 
     pub fn zip<U>(self, m: Matrix<U, R, C>) -> Matrix<(T, U), R, C> {
