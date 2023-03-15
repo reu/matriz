@@ -85,6 +85,10 @@ impl<T: Scalar, const R: usize, const C: usize> Matrix<T, R, C> {
     pub fn zero() -> Self {
         Self([[T::zero(); C]; R])
     }
+
+    pub fn splat(item: T) -> Self {
+        Self([[item; C]; R])
+    }
 }
 
 impl<T: Scalar, const N: usize> Matrix<T, N, N> {
@@ -213,6 +217,17 @@ mod test {
         ]);
 
         assert_eq!(Matrix::zero(), expected);
+    }
+
+    #[test]
+    fn test_matrix_splat() {
+        #[rustfmt::skip]
+        let expected = Matrix::from_rows([
+            [3, 3, 3],
+            [3, 3, 3],
+        ]);
+
+        assert_eq!(Matrix::splat(3), expected);
     }
 
     #[test]
