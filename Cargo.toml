@@ -16,3 +16,11 @@ all-features = true
 default = ["std"]
 std = []
 full = ["std"]
+
+[dev-dependencies]
+criterion = { version = "0.4", features = ["html_reports"] }
+nalgebra = "0.32.2"
+
+[[bench]]
+name = "nalgebra"
+harness = false
