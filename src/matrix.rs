@@ -108,7 +108,7 @@ pub enum TryFromIterError {
 }
 
 impl<T, const R: usize, const C: usize> Matrix<T, R, C> {
-    fn from_rows(rows: [[T; C]; R]) -> Self {
+    pub fn from_rows(rows: [[T; C]; R]) -> Self {
         Self(rows)
     }
 
