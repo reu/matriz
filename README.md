@@ -12,13 +12,11 @@ generate proper typed results.
 ```rust
 use matriz::Matrix;
 
-#[rustfmt::skip]
 let m1 = Matrix::from_rows([
     [1, -2, 4],
     [5,  0, 3],
 ]);
 
-#[rustfmt::skip]
 let m2 = Matrix::from_rows([
     [ 1],
     [ 5],
